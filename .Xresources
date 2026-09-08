@@ -1,0 +1,73 @@
+Xcursor.theme: Vimix-white-cursors
+Xcursor.size: 38
+
+! --- Suckless Terminal (st) Configuration ---
+st.font: Inconsolata Nerd Font:style=Regular:size=10:antialias=true:autohint=true
+st.alpha: 1
+st.borderpx: 2
+st.borderless: 1
+
+! Tokyo Night Palette
+!st.foreground: #c0caf5
+!st.background: #111417
+!st.cursorColor: #c0caf5
+!
+!! 16 Terminal Colors
+!st.color0:     #1f2335
+!st.color8:     #414868
+!st.color1:     #f7768e
+!st.color9:     #f7768e
+!st.color2:     #9ece6a
+!st.color10:    #9ece6a
+!st.color3:     #e0af68
+!st.color11:    #e0af68
+!st.color4:     #7aa2f7
+!st.color12:    #7aa2f7
+!st.color5:     #bb9af7
+!st.color13:    #bb9af7
+!st.color6:     #7dcfff
+!st.color14:    #7dcfff
+!st.color7:     #a9b1d6
+!st.color15:    #c0caf5
+
+! Modus Vivendi colorscheme for st
+*.foreground: #ffffff
+*.background: #000000
+*.cursorColor: #ffffff
+
+! black
+st.color0: #000000
+st.color8: #595959
+
+! red
+st.color1: #ff8059
+st.color9: #ff9077
+
+! green
+st.color2: #44bc44
+st.color10: #70b900
+
+! yellow
+st.color3: #d0bc00
+st.color11: #c0c530
+
+! blue
+st.color4: #2fafff
+st.color12: #79a8ff
+
+! magenta
+st.color5: #feacd0
+st.color13: #f78fe7
+
+! cyan
+st.color6: #00d3d0
+st.color14: #4ae2f0
+
+! white
+st.color7: #ffffff
+st.color15: #ffffff
+
+! extra st-specific
+st.background: #000000
+st.foreground: #ffffff
+st.cursorColor: #ffffff

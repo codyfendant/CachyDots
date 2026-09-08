@@ -1,0 +1,7 @@
+cursor {
+    xcursor-theme "macOS-White"
+    xcursor-size 34
+    hide-when-typing
+
+    hide-after-inactive-ms 3000
+}

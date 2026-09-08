@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+# dropterm!
+#
+# launches a terminal once and toggles it with a slide. hiding parks the window
+# on the trailing workspace instead of closing it, so there is no open/close
+# animation on toggle, only the slide. the session runs in tmux so it survives a
+# niri restart. on startup you'll notice it kind of "pop" in, but after that it will be smooth til
+# you restart
+#
+# config lives in ~/.config/dropterm/config (see dropterm.conf.example)
+set -euo pipefail
+
+# defaults. override these in the config file not here
+APP_ID="dropterm.scratch"  # unique window app-id, must match the niri window-rule (keep it dotted for ghostty)
+TERMINAL="kitty"           # kitty, ghostty, alacritty, foot, or anything that speaks kitty's --class/-e flags
+WIDTH="100%"               # window width: percentage of the screen, or pixels
+HEIGHT="45%"               # window height: percentage of the screen, or pixels
+X="center"                 # horizontal position: center, left, right, or pixels from the left
+TOP_MARGIN=30              # pixels below the top edge when shown (i default it to 30-40 to make it look like it's coming out of my bar)
+
+CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/dropterm/config"
+[ -f "$CONFIG" ] && . "$CONFIG"
+
+# build the launcher for the chosen terminal. each flavor gets its app-id/class
+# set to $APP_ID so your niri window-rule keeps matching whatever terminal you
+# pick. for anything more exotic, set the full TERM_CMD array yourself in the
+# config instead, e.g. TERM_CMD=(wezterm start --class "$APP_ID" -- tmux ...)
+TMUX_CMD=(tmux -f "$HOME/.config/dropterm/tmux.conf" new-session -A -s dropterm)
+if [ -z "${TERM_CMD+x}" ]; then
+    case "$TERMINAL" in
+        kitty)     TERM_CMD=(kitty --class "$APP_ID" -e "${TMUX_CMD[@]}") ;;
+        ghostty)   TERM_CMD=(ghostty --class="$APP_ID" -e "${TMUX_CMD[@]}") ;;
+        alacritty) TERM_CMD=(alacritty --class "$APP_ID" -e "${TMUX_CMD[@]}") ;;
+        foot)      TERM_CMD=(foot --app-id "$APP_ID" "${TMUX_CMD[@]}") ;;
+        *)         TERM_CMD=("$TERMINAL" --class "$APP_ID" -e "${TMUX_CMD[@]}") ;;
+    esac
+fi
+
+dropterm_window() {
+    niri msg -j windows | jq -c --arg a "$APP_ID" 'map(select(.app_id==$a)) | .[0] // empty'
+}
+focused_ws_id()  { niri msg -j workspaces | jq -r '.[]|select(.is_focused)|.id'; }
+focused_ws_idx() { niri msg -j workspaces | jq -r '.[]|select(.is_focused)|.idx'; }
+focused_output() { niri msg -j workspaces | jq -r '.[]|select(.is_focused)|.output'; }
+
+# highest workspace index on the focused output (the trailing empty workspace)
+park_idx() {
+    niri msg -j workspaces | jq -r --arg o "$(focused_output)" \
+        'map(select(.output==$o)) | max_by(.idx) | .idx'
+}
+
+wait_for_window() {
+    local id=""
+    for _ in $(seq 1 60); do
+        id=$(niri msg -j windows | jq -r --arg a "$APP_ID" 'map(select(.app_id==$a)) | .[0].id // empty')
+        [ -n "$id" ] && { echo "$id"; return 0; }
+        sleep 0.05
+    done
+}
+
+# set the window size, then move it to its resting position. move-floating-window
+# is relative and niri clamps it, so read the live geometry and move by the delta
+apply_geometry() {
+    local id="$1" ow ww cx cy tx dx dy
+    niri msg action set-window-width  --id "$id" "$WIDTH"  >/dev/null 2>&1 || true
+    niri msg action set-window-height --id "$id" "$HEIGHT" >/dev/null 2>&1 || true
+    ow=$(niri msg -j focused-output | jq -r '.logical.width')
+    read -r ww cx cy < <(niri msg -j windows | jq -r --arg a "$APP_ID" \
+        'map(select(.app_id==$a)) | .[0]
+         | "\(.layout.window_size[0]) \(.layout.tile_pos_in_workspace_view[0]) \(.layout.tile_pos_in_workspace_view[1])"')
+    case "$X" in
+        center) tx=$(awk -v o="$ow" -v w="$ww" 'BEGIN { printf "%d", (o - w) / 2 }') ;;
+        left)   tx=0 ;;
+        right)  tx=$(awk -v o="$ow" -v w="$ww" 'BEGIN { printf "%d", o - w }') ;;
+        *)      tx="$X" ;;
+    esac
+    dx=$(awk -v t="$tx" -v c="$cx" 'BEGIN { printf "%+d", t - c }')
+    dy=$(awk -v t="$TOP_MARGIN" -v c="$cy" 'BEGIN { printf "%+d", t - c }')
+    niri msg action move-floating-window --id "$id" -x="$dx" -y="$dy" >/dev/null 2>&1 || true
+}
+
+win=$(dropterm_window)
+
+if [ -z "$win" ]; then
+    # first launch spawn, position, focus. animation fires
+    # here once and never again, since later toggles park instead of close
+    "${TERM_CMD[@]}" &
+    id=$(wait_for_window)
+    [ -n "$id" ] || exit 0
+    sleep 0.05
+    apply_geometry "$id"
+    niri msg action focus-window --id "$id" >/dev/null 2>&1 || true
+else
+    id=$(printf '%s' "$win" | jq -r '.id')
+    win_ws=$(printf '%s' "$win" | jq -r '.workspace_id')
+    if [ "$win_ws" != "$(focused_ws_id)" ]; then
+        # show: pull to the current workspace, position, focus.
+        niri msg action move-window-to-workspace "$(focused_ws_idx)" --window-id "$id" --focus true >/dev/null 2>&1 || true
+        sleep 0.08
+        apply_geometry "$id"
+        niri msg action focus-window --id "$id" >/dev/null 2>&1 || true
+    elif [ "$(printf '%s' "$win" | jq -r '.is_focused')" = "true" ]; then
+        # hide: slide up, then park off-view on the trailing workspace.
+        niri msg action move-floating-window --id "$id" -y=-2000 >/dev/null 2>&1 || true
+        sleep 0.28
+        niri msg action move-window-to-workspace "$(park_idx)" --window-id "$id" --focus false >/dev/null 2>&1 || true
+    else
+        # on this workspace but not focused: focus first, next press hides.
+        # if it was parked here off-screen (you switched to the trailing
+        # workspace), pull it back down instead so focus isn't invisible
+        win_y=$(printf '%s' "$win" | jq -r '.layout.tile_pos_in_workspace_view[1] // 0')
+        # niri gives fractional coords for floating windows; drop the decimals
+        # since bash [ -lt ] only does integers
+        if [ "${win_y%%.*}" -lt 0 ]; then
+            apply_geometry "$id"
+        fi
+        niri msg action focus-window --id "$id" >/dev/null 2>&1 || true
+    fi
+fi

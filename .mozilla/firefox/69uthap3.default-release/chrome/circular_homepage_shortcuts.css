@@ -1,0 +1,8 @@
+@-moz-document url("about:home"),
+  url("about:newtab") {
+  
+    #root .top-site-outer .top-site-inner .tile {
+        border-radius: 50% !important;
+    }
+  
+}

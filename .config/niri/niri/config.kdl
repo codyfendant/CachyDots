@@ -1,0 +1,48 @@
+include "noctalia/autostart.kdl"
+
+input {
+    warp-mouse-to-focus
+
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+    touchpad {
+        natural-scroll
+
+
+
+        dwt
+
+        tap
+
+        accel-profile "flat"
+
+        accel-speed 1.0
+    }
+    mouse {
+
+        accel-speed 0.39999999999999997
+
+        accel-profile "adaptive"
+    }
+}
+include "noctalia/input.kdl"
+include "noctalia/outputs.kdl"
+include "noctalia/keybinds.kdl"
+include "noctalia/layout.kdl"
+include "noctalia/rules.kdl"
+include "noctalia/animation.kdl"
+include "noctalia/alttab.kdl"
+include "noctalia/colors.kdl"
+
+
+
+
+include "noctalia/cursor.kdl"
+
+include "noctalia.kdl"
+
+    prefer-no-csd
+

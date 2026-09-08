@@ -1,0 +1,6 @@
+content userchromejs ./
+content userscripts ../natsumi/scripts/
+skin userstyles classic/1.0 ../CSS/
+content userchrome ../resources/
+content natsumi ../natsumi/
+content natsumi-icons ../natsumi/icons/

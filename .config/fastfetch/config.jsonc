@@ -1,0 +1,156 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "auto",
+    "source": "~/.config/fastfetch/hp_fade.log",
+    "color": {
+      "1": "\u001b[31m", //red
+      "2": "\u001b[32m", //green
+      "3": "\u001b[33m", //yellow
+      "4": "\u001b[34m", //blue
+      "5": "\u001b[35m", //magenta
+      "6": "\u001b[36m", //cyan
+      "7": "\u001b[37m", //white
+      "8": "\u001b[92m", //black
+      "9": "\u001b[93m",
+    },
+    "padding": {
+      "top": 2,
+      "right": 5,
+      "left": 5,
+    },
+  },
+  "display": {
+    "separator": "⊂⊃  ",
+    "color": {
+      "separator": "red",
+    },
+    "constants": [
+      "───────────────────────────────────────────",
+      "│\u001b[43C│\u001b[43D",
+    ],
+    "bar": {
+      "char": {
+        "elapsed": "▰", // Character for the filled part
+        "total": " ",
+      },
+      "border": {
+        "left": "⊂",
+        "right": "⊃",
+      },
+      "width": 14, // Adjusts how long the bar is (in characters)
+    },
+    "percent": {
+      "type": 3,
+    },
+  },
+  "modules": [
+    "break",
+    "break",
+    "break",
+    "break",
+    //{
+    //    "format": "{#1}{#keys}╭{$1}╮\u001b[40D╼ {#32}{user-name}{#33}@{#36}{host-name} {#35}╾",
+    //    "type": "title",
+    //},
+    //{
+    //    "type": "custom",
+    //    "format": "{#keys}{$2}",
+    //},
+    {
+      "type": "custom",
+      "format": " \u001b[0;31m▄──▄\u001b[0;37m \u001b[0;31m▄──▄\u001b[0;37m \u001b[0;31m▄──▄\u001b[0;37m \u001b[0;31m─▄─\u001b[0;37m \u001b[0;31m▄──▄\u001b[0;37m \u001b[0;31m▄──▄\u001b[0;37m \u001b[0;31m─▄─\u001b[0;37m \u001b[0;91;1m \u001b[0;31m▄──▄\u001b[0;37m \u001b[0;31m▄\u001b[0;91;1m  \u001b[0;31m▄\u001b[0m",
+    },
+    {
+      "type": "custom",
+      "format": " \u001b[0;91;1m█─ ▀\u001b[0;37m \u001b[0;91;1m█──█\u001b[0;37m \u001b[0;91;1m▀──▄\u001b[0;37m \u001b[0;91;1m █ \u001b[0;37m \u001b[0;91;1m█─ ▀\u001b[0;37m \u001b[0;91;1m█─  \u001b[0;37m \u001b[0;91;1m █ \u001b[0;37m \u001b[0;91;1m▐▌   \u001b[0;37m \u001b[0;91;1m█──█\u001b[0m",
+    },
+    {
+      "type": "custom",
+      "format": " \u001b[0;97;1m▀\u001b[0;91;1m   \u001b[0;37m \u001b[0;97;1m▀\u001b[0;91;1m  \u001b[0;97;1m▀\u001b[0;37m \u001b[0;97;1m▀──▀\u001b[0;37m \u001b[0;91;1m \u001b[0;97;1m▀\u001b[0;91;1m \u001b[0;37m \u001b[0;97;1m▀\u001b[0;91;1m   \u001b[0;37m \u001b[0;97;1m▀──▀\u001b[0;37m \u001b[0;91;1m \u001b[0;97;1m▀\u001b[0;91;1m \u001b[0;37m \u001b[0;91;1m \u001b[0;97;1m▀──▀\u001b[0;37m \u001b[0;97;1m▀\u001b[0;91;1m  \u001b[0;97;1m▀\u001b[0m",
+    },
+    {
+      "type": "custom",
+      "format": "{#1}{#keys}╭{$1}╮",
+    },
+    //{
+    //    "type": "custom",
+    //    "format": "{#1}{#keys}╭{$1}╮",
+    //},
+    {
+      "key": "{$2}{#91} kernel   ",
+      "type": "kernel",
+    },
+    {
+      "key": "{$2}{#32}󰅐 uptime   ",
+      "type": "uptime",
+    },
+    {
+      "key": "{$2}{#33}{icon} distro   ",
+      "type": "os",
+      "format": "{3}",
+    },
+    {
+      "key": "{$2}{#34}󰇄 desktop  ",
+      "type": "de",
+    },
+    {
+      "key": "{$2}{#35} term     ",
+      "type": "terminal",
+      "format": "{5}",
+    },
+    {
+      "key": "{$2}{#36} shell    ",
+      "type": "shell",
+    },
+    {
+      "key": "{$2}{#35}󰍛 cpu      ",
+      "type": "cpu",
+      "format": "{1:11}",
+      "showPeCoreCount": false,
+      "temp": false,
+    },
+    {
+      "key": "{$2}{#34}󰍛 gpu      ",
+      "type": "gpu",
+      "format": "{2:14}",
+    },
+    {
+      "key": "{$2}{#33}󰉉 disk     ",
+      "type": "disk",
+      "folders": "/",
+      "format": "{13} {#35}{size-percentage}",
+    },
+    {
+      "key": "{$2}{#32} memory   ",
+      "type": "memory",
+      "format": "{4} {#cyan}{3}",
+    },
+    {
+      "key": "{$2}{#31}󰩟 network  ",
+      "type": "localip",
+      "format": "{ipv4} ({ifname})",
+    },
+    //{
+    //    "format": "{#1}{#keys}├{$1}┤",
+    //    "type": "custom",
+    //},
+    //{
+    //    "format": "{#36}{$2}\u001b[41;30m██▓▒░\u001b[42;31m██▓▒░\u001b[43;32m██▓▒░\u001b[44;33m██▓▒░\u001b[45;34m██▓▒░\u001b[46;35m██▓▒░\u001b[47;36m██▓▒░\u001b[37m██\u001b[0m",
+    //    "type": "custom",
+    //},
+    //{
+    //    "type": "custom",
+    //    "format": "{$2}{#keys}  {#91}C{#35}o{#95}l{#32}o{#33}r{#31}s {#31} {#91} {#32} {#92} {#33} {#93} {#34} {#94} {#35} {#95} {#36} {#96} {#37} {#97}",
+    //},
+    //{
+    //    "type": "custom",
+    //    "format": "{$2}{#keys}{#31}{#91} {#32}{#92} {#33}{#93} {#34}{#94} {#35}{#95} {#36}{#96} {#37}{#97}",
+    //},
+    {
+      "format": "{#1}{#keys}╰{$1}╯",
+      "type": "custom",
+    },
+  ],
+}
+//             

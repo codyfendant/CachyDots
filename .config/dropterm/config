@@ -1,0 +1,29 @@
+# dropterm config. this file is sourced by the dropterm script as bash
+# hot reloadable script, changes here reflect on toggle
+
+# unique id used to find and float the dropdown
+# ghostty requires a dotted GTK id, kitty/foot/wezterm accept anything
+# if you change this, also change the matching app-id in dropterm.kdl
+# (installed to ~/.config/niri/dropterm.kdl).
+APP_ID="dropterm.st"
+
+# XY percentage of the screen ("100%", "45%") or pixels ("1920").
+WIDTH="45%"
+HEIGHT="50%"
+
+# X center, left, right, or pixels from the left edge.
+X="30"
+
+# pixels below the top edge when shown (makes it look like it comes out of the top bar)
+TOP_MARGIN=50
+# class/app-id flag passed in by APP_ID variable above, spawn with tmux 
+# TERM_CMD=(kitty --class "$APP_ID" -e tmux -f "$HOME/.config/dropterm/tmux.conf" new-session -A -s dropterm)
+# TERM_CMD=(foot --app-id "$APP_ID" -- tmux -f "$HOME/.config/dropterm/tmux.conf" new-session -A -s dropterm)
+# TERM_CMD=(ghostty --class="$APP_ID" -e tmux -f "$HOME/.config/dropterm/tmux.conf" new-session -A -s dropterm)
+# TERM_CMD=(wezterm start --class "$APP_ID" -- tmux -f "$HOME/.config/dropterm/tmux.conf" new-session -A -s dropterm)
+
+# to run without tmux (no persistent session), drop the tmux part
+
+#TERM_CMD=(kitty --class "$APP_ID")
+#
+TERM_CMD=(~/repos/st/st -c "$APP_ID")

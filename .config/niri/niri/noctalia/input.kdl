@@ -1,0 +1,29 @@
+
+input {
+    warp-mouse-to-focus
+
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+    touchpad {
+        natural-scroll
+
+
+
+        dwt
+
+        tap
+
+        accel-profile "flat"
+
+        accel-speed 1.0
+    }
+    mouse {
+
+        accel-speed 0.39999999999999997
+
+        accel-profile "adaptive"
+    }
+}

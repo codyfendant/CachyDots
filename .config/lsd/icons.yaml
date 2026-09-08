@@ -1,0 +1,20 @@
+# 1. Exact string matches for directory/file names
+name:
+  .trash: "󰩹 "
+  downloads: "󰇚 "
+  desktop: " "
+  config: " "
+
+# 2. General fallback interfaces for global types
+filetype:
+  dir: " "
+  file: " "
+  symlink: "󰌷 "
+  directory: " "
+# 3. Trailing file extension characters
+extension:
+  md: "󰍔 "
+  py: " "
+  sh: "󱆃 "
+  json: " "
+

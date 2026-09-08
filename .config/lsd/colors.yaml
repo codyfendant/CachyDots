@@ -1,0 +1,44 @@
+# Metadata Info Colors
+user: 211
+group: 115
+permission:
+  read: 111
+  write: 220
+  execute: 114
+date: 146
+size:
+  none: 243
+  small: 115
+  medium: 221
+  large: 204
+inode: 137
+links:
+  valid: 45
+  invalid: 197
+git-status:
+  default: 242
+  untracked: 214
+  ignored: 240
+  modified: 203
+  typechange: 102
+  added: 114
+  renamed: 117
+  deleted: 161
+
+# Structural/Filetype Color Mappings
+filetype:
+  dir:
+    uid: 45
+    no-uid: 39
+  file:
+    exec: 114
+    no-exec: 250
+  symlink:
+    valid: 45
+    invalid: 197
+  block-device: 221
+  char-device: 222
+  socket: 168
+  pipe: 141
+  special: 205
+
