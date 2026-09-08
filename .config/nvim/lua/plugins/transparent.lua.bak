@@ -1,0 +1,16 @@
+return {
+  {
+    "xiyaowong/transparent.nvim",
+    lazy = false, -- Avoid lazy-loading to ensure highlight clearing works instantly
+    priority = 1000, -- Load this early before other UI components
+    opts = {
+      extra_groups = {
+        "BufferLineBackground",
+        "BufferLineFill",
+        "BufferLineTabSelected",
+        "NeoTreeNormal",
+        "NeoTreeNormalNC",
+      },
+    },
+  },
+}

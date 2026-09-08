@@ -1,0 +1,55 @@
+--vim.api.nvim_create_autocmd("ColorScheme", {
+--  callback = function()
+--    local groups = {
+--      -- base
+--      "Normal",
+--      "NormalNC",
+--      "NormalFloat",
+--      "SignColumn",
+--      "EndOfBuffer",
+--      "MsgArea",
+--      "FoldColumn",
+--      "VertSplit",
+--      "WinSeparator",
+--      "LineNr",
+--      "LineNrAbove",
+--      "LineNrBelow",
+--      "CursorLineNr",
+--
+--      -- which-key (spacebar popup)
+--      "WhichKey",
+--      "WhichKeyFloat",
+--      "WhichKeyDesc",
+--      "WhichKeyGroup",
+--      "WhichKeySeparator",
+--      "WhichKeyValue",
+--
+--      -- snacks.nvim dashboard (current LazyVim default)
+--      "snacks_dashboard",
+--      "SnacksDashboardNormal",
+--      "SnacksDashboardFooter",
+--      "SnacksDashboardHeader",
+--      "SnacksDashboardDesc",
+--      "SnacksDashboardKey",
+--      "SnacksDashboardIcon",
+--      "SnacksDashboardTitle",
+--    }
+--    for _, group in ipairs(groups) do
+--      local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+--      hl.bg = "none"
+--      vim.api.nvim_set_hl(0, group, hl)
+--    end
+--  end,
+--})
+--
+--vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+--  pattern = { "*/fastfetch/*ascii*", "*/fastfetch/*.txt" }, -- adjust to match your actual art file path
+--  callback = function()
+--    vim.opt_local.conceallevel = 2
+--    vim.opt_local.concealcursor = "nc" -- conceal in normal/command mode, but reveal on the line you're editing in insert mode
+--
+--    vim.cmd([[
+--      syntax match FastfetchColorCode "\$[0-9]\+" conceal
+--    ]])
+--  end,
+--})
