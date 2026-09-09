@@ -5,7 +5,4 @@ clients:
   - type: openai-compatible
     name: groq
     api_base: https://api.groq.com/openai/v1
-
-    gsk_
-    9hj65RCWmo2mMYbTO7aZWGd
-    yb3FYAEafewhcqD6QAIRLZoJg9kJy
+    api_key: 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
