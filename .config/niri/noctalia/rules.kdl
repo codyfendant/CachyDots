@@ -175,3 +175,11 @@ window-rule {
     inactive-color "#1e1e1e"
   }
 }
+
+layer-rule {
+  match namespace="^launcher$"
+  background-effect {
+    blur true
+    xray false
+  }
+}
