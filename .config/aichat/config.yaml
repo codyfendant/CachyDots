@@ -1,8 +1,0 @@
-# see https://github.com/sigoden/aichat/blob/main/config.example.yaml
-
-model: groq:openai/gpt-oss-120b
-clients:
-- type: openai-compatible
-  name: groq
-  api_base: https://api.groq.com/openai/v1
-  api_key: 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
