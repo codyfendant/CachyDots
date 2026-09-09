@@ -12,7 +12,8 @@ binds {
   Mod+W           hotkey-overlay-title="Open Wallpaper Selector"    { spawn-sh "noctalia msg panel-toggle wallpaper"; }
   Mod+Shift+C     hotkey-overlay-title="Open Control Center"        { spawn-sh "noctalia msg panel-toggle control-center"; }
   Mod+S           hotkey-overlay-title="Open Settings"              { spawn-sh "noctalia msg settings-toggle"; }
-  Mod+Space       hotkey-overlay-title="Open App Launcher"          { spawn-sh "noctalia msg panel-toggle launcher"; }
+  //Mod+Space       hotkey-overlay-title="Open App Launcher"          { spawn-sh "noctalia msg panel-toggle launcher"; }
+  Mod+Space       hotkey-overlay-title="Launch Fuzzel"              { spawn "fuzzel"; }
   Mod+L           hotkey-overlay-title="Lock Screen"                { spawn-sh "noctalia msg session lock"; }
   Mod+Shift+Q     hotkey-overlay-title="Session Menu"               { spawn-sh "noctalia msg panel-toggle session"; }
 

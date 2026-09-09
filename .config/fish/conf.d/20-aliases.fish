@@ -139,7 +139,6 @@ alias ktfetch='kotofetch'
 alias pipv='python -m venv venv && python -m venv venv && source venv/bin/activate'
 alias noctalia-restart='noctalia list  --json | jq .[].pid | xargs -r ; noctalia -d'
 alias systemls='systemctl list-units --type=service --state=running'
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.cachydots/ --work-tree=$HOME'
 
 #FastFetch Aliases
 alias fast=fastfetch
@@ -155,6 +154,16 @@ alias wezcf='nvim ~/.config/wezterm/wezterm.lua'
 ####### ST ALIASES #######
 ##########################
 alias strl='xrdb -merge ~/.Xresources && pidof st | xargs kill -s USR1'
+
+##########################
+##### DOTFILE REPO SC#####
+##########################
+alias dots='git --git-dir=$HOME/.cachydots/ --work-tree=$HOME'
+alias dfpush='git --git-dir=$HOME/.cachydots/ --work-tree=$HOME push -u origin main'
+alias dfcommit='git --git-dir=$HOME/.cachydots/ --work-tree=$HOME commit -m'
+alias dfadd='git --git-dir=$HOME/.cachydots/ --work-tree=$HOME add'
+alias dfcheck='git --git-dir=$HOME/.cachydots/ --work-tree=$HOME chekout'
+alias dfstatus='git --git-dir=$HOME/.cachydots/ --work-tree=$HOME status'
 
 #Abbrviation Aliases
 abbr -a conf --position anywhere '~/.config/'
