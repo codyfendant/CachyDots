@@ -1,114 +1,69 @@
-workspace "desktop" {}
-workspace "secondary" {}
-workspace "scratch" {}
+// DMS Window Rules - Managed by DankMaterialShell
+// Do not edit manually - changes may be overwritten
+
+// @id=dms_rule_0 @name=
 window-rule {
     match title="Keybinds"
     open-floating true
 }
-//window-rule {
-//    match app-id="kitty-quick-access"
-//    open-floating true
-//    default-floating-position x=0 y=0 relative-to="top-left"
-//    // You can also adjust width and height here if desired
-//}
-//window-rule {
-//    match app-id="kitty-quick-access"
-//    open-floating true
-//    default-column-width { fixed 1000; }
-//    default-window-height { fixed 600; }
-//}
 
+// @id=dms_rule_7 @name=
 window-rule {
-    match app-id="^alacritty-scratch$"
-    open-floating true
-    default-floating-position x=20 y=20 relative-to="top-left"
-    default-column-width { fixed 970; }
-    default-window-height { fixed 500; }
+    match app-id="^floorp$"
     background-effect {
-      blur true
-      xray true
+        blur true
+        xray true
     }
 }
 
-window-rule {
-    match app-id="scratchpad-s"
-    open-floating true
-    default-floating-position x=0 y=32 relative-to="top"
-    default-column-width { fixed 1200; }
-    default-window-height { fixed 720; }
-}
-
-window-rule {
-    match app-id="^kitty-scratch$"
-    open-floating true
-    default-column-width { fixed 1400; }
-    default-window-height { fixed 900; }
-
-
-}
-
-window-rule {
-  match app-id="kitty-quick-access"
-  open-floating true
-}
-//window-rule {
-//    match app-id="scratchpad"
-//
-//    // Force the window to open floating
-//    open-floating true
-//
-//    // Set default dimensions (width x height in percentage or pixels)
-//    default-column-width { proportion 0.8; }
-//    default-window-height { proportion 0.7; }
-//}
-
-
-
-
-
-window-rule {
-    match app-id="^kitty-scratchpad$"
-    open-floating true
-    default-column-width { fixed 600; }
-    default-window-height { fixed 400; }
-}
-window-rule {
-    match app-id="^Spotify|easyeffects$"
-    open-floating true
-    default-column-width { fixed 1420; }
-    default-window-height { fixed 800; }
-}
-
-window-rule {
-    match app-id="^floorp$"  // check exact app-id with `niri msg windows`
-    background-effect {
-      blur true
-      xray true
-    }// or whatever the actual blur property name is — check current docs
-}
-
+// @id=dms_rule_8 @name=
 window-rule {
     match app-id="^Alacritty$"
     background-effect {
-      blur true
-      xray true
+        blur true
+        xray true
     }
 }
 
+// @id=dms_rule_9 @name=
 window-rule {
     match app-id="Oklch Color Picker"
     open-floating true
-    //default-floating-position x=500 y=0 relative-to="bottom"
     default-column-width { fixed 600; }
     default-window-height { fixed 360; }
 }
 
+// @id=dms-floating-windows @name=DMS Floating Windows
 window-rule {
-    match app-id="^alatop$"
+    match app-id="^com.danklinux.dms$"
     open-floating true
-    default-floating-position x=20 y=20 relative-to="top-right"
+}
+
+// @id=dms_rule_5 @name=
+window-rule {
+    match app-id="^dropterm.st$"
+    open-floating true
     background-effect {
-      blur true
-      xray true
+        blur false
+        xray false
     }
+}
+
+// @id=dms_rule_6 @name=
+window-rule {
+    match app-id="^dropterm.nvim$"
+    open-floating true
+}
+
+// @id=dms_rule_7 @name=
+window-rule {
+    match app-id="^droptop$"
+    open-floating true
+    border { active-color "#1f142f"; }
+    focus-ring { off; }
+}
+
+// @id=dms_rule_8 @name=
+window-rule {
+    border { active-color "#003353"; }
 }
